@@ -1,5 +1,7 @@
 package Ticket_Booking_System.dto;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,5 +19,5 @@ public class BookingSeatResponseDTO {
 
     private Long showSeatId;
 
-    private Double priceAtBooking;
+    private BigDecimal priceAtBooking;
 }

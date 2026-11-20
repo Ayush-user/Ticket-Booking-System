@@ -1,11 +1,13 @@
 package Ticket_Booking_System.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import Ticket_Booking_System.dto.ShowRequestDTO;
 import Ticket_Booking_System.dto.ShowResponseDTO;
@@ -38,6 +40,7 @@ public class ShowService {
     
     private final ModelMapper modelMapper;
 
+    @Transactional
     public ShowResponseDTO addShow(Long movieId, Long screenId, ShowRequestDTO requestDTO) {
 
         if (!requestDTO.getEndTime().isAfter(requestDTO.getStartTime())) {
@@ -92,7 +95,7 @@ public class ShowService {
             showSeat.setStatus(SeatStatus.AVAILABLE);
             showSeat.setPrice(
             		seat.getSeatType().equals(SeatType.PREMIUM)? 
-            				savedShow.getTicketPrice()+100 : savedShow.getTicketPrice());
+            				savedShow.getTicketPrice().add(BigDecimal.valueOf(100)) : savedShow.getTicketPrice());
 
             showSeats.add(showSeat);
         }

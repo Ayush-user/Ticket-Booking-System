@@ -54,13 +54,13 @@ public class MovieService {
 	public List<MovieResponseDTO> getAllMoviesByTitle(String title) {
 		List<Movie> movies=movieRepository.findByTitleIgnoreCase(title);
 		
-		return movies.stream().map(movie-> modelMapper.map(movies, MovieResponseDTO.class)).toList();
+		return movies.stream().map(movie-> modelMapper.map(movie, MovieResponseDTO.class)).toList();
 	}
 	
 	public List<MovieResponseDTO> getAllMoviesByGenre(String genre) {
 		List<Movie> movies=movieRepository.findByGenreIgnoreCase(genre);
 		
-		return movies.stream().map(movie->modelMapper.map(movies, MovieResponseDTO.class)).toList();
+		return movies.stream().map(movie->modelMapper.map(movie, MovieResponseDTO.class)).toList();
 	}
 	
 	public MovieResponseDTO updateMovieById(long id,MovieRequestDTO movieRequestDTO) {

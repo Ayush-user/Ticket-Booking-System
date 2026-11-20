@@ -16,12 +16,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "bookings")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Booking {
@@ -38,6 +40,7 @@ public class Booking {
     @JoinColumn(name = "show_id")
     private Show show;
 
+    @Column(precision = 10, scale = 2)
     private BigDecimal totalAmount;
 
     private LocalDateTime bookingDateTime;

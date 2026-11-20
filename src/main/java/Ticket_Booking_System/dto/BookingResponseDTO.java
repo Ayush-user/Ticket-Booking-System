@@ -1,5 +1,6 @@
 package Ticket_Booking_System.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,11 +24,13 @@ public class BookingResponseDTO {
 
 	    private Long showId;
 
-	    private Double totalAmount;
+	    private BigDecimal totalAmount;
 
 	    private LocalDateTime bookingDateTime;
 
 	    private BookingStatus status;
 
 	    private String bookingReference;
+	    
+	    private List<BookingSeatResponseDTO> seats;
 }

@@ -1,5 +1,6 @@
 package Ticket_Booking_System.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -27,5 +28,5 @@ public class ShowRequestDTO {
 	private LocalTime endTime;
 
 	@NotNull
-	private Double ticketPrice;
+	private BigDecimal ticketPrice;
 }

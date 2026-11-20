@@ -9,5 +9,5 @@ import Ticket_Booking_System.entity.User;
 
 public interface TheatreRepository extends JpaRepository<Theatre,Long>{
 
-
+	
 }

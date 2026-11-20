@@ -14,13 +14,23 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Table(name = "show_seats")
-@Data
+@Table(
+	    name = "show_seats",
+	    uniqueConstraints = {
+	        @UniqueConstraint(
+	            columnNames = {"show_id", "seat_id"}
+	        )
+	    }
+	)
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShowSeat {
@@ -37,7 +47,8 @@ public class ShowSeat {
     @JoinColumn(name = "seat_id")
     private Seat seat;
 
-    private double price;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
     private SeatStatus status;

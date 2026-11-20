@@ -2,6 +2,7 @@ package Ticket_Booking_System.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -29,7 +30,75 @@ public class SecurityConfiguration {
 		http.sessionManagement(session -> session
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-		http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+
+http.authorizeHttpRequests(auth -> auth
+
+    .requestMatchers(
+        "/api/v1/auth/register",
+        "/api/v1/auth/login"
+    ).permitAll()
+
+    .requestMatchers(
+        "/swagger-ui/**",
+        "/v3/api-docs/**"
+    ).permitAll()
+
+    .requestMatchers(
+        HttpMethod.GET,
+        "/api/v1/movies",
+        "/api/v1/movies/**"
+    ).permitAll()
+
+    .requestMatchers(
+        HttpMethod.GET,
+        "/api/v1/theatres",
+        "/api/v1/theatres/**"
+    ).permitAll()
+
+    .requestMatchers(
+        HttpMethod.GET,
+        "/api/v1/shows",
+        "/api/v1/shows/**"
+    ).permitAll()
+
+    .requestMatchers(
+        HttpMethod.GET,
+        "/api/v1/shows/*/seats",
+        "/api/v1/screens/*/seats"
+    ).permitAll()
+
+    .requestMatchers(
+        "/api/v1/users/me"
+    ).hasAnyRole("CUSTOMER", "ADMIN")
+
+    .requestMatchers(
+        "/api/v1/users"
+    ).hasRole("ADMIN")
+
+    .requestMatchers(
+        "/api/v1/movies/**"
+    ).hasRole("ADMIN")
+
+    .requestMatchers(
+        "/api/v1/theatres/**",
+        "/api/v1/screens/**"
+    ).hasRole("ADMIN")
+
+    .requestMatchers(
+        "/api/v1/shows/**"
+    ).hasRole("ADMIN")
+
+    .requestMatchers(
+        "/api/v1/bookings/**"
+    ).hasAnyRole("CUSTOMER", "ADMIN")
+
+    .anyRequest().authenticated()
+);
+
+		
+		
+//		http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+		
 //		http.authorizeHttpRequests(auth -> auth
 //
 //                // Authentication: public endpoints

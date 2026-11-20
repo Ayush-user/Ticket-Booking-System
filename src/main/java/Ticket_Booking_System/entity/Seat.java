@@ -12,13 +12,23 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Table(name = "seats")
-@Data
+@Table(
+	    name = "seats",
+	    uniqueConstraints = {
+	        @UniqueConstraint(
+	            columnNames = {"screen_id", "seat_number"}
+	        )
+	    }
+	)
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Seat {
@@ -27,7 +37,7 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(unique=true,name = "seat_number")
+    @Column(name = "seat_number")
     private String seatNumber;
     
     @Enumerated(EnumType.STRING)
